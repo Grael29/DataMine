@@ -1224,7 +1224,7 @@ dtype: int64
 <li><p>Mengambil sejumlah K data dengan jarak terdekat, kemudian tentukan kelas dari data baru tersebut.</p></li>
 </ul>
 <p>Untuk mencari dekat atau jauhnya jarak antar titik pada kelas k biasanya dihitung menggunakan jarak Euclidean. Jarak Euclidean adalah formula untuk mencari jarak antara 2 titik dalam ruang dua dimensi. Berikut rumus untuk menghitung jarak Euclidean:</p>
-<img src="image-20240320-181855-20240320-111907.png" width="" align="" /><div class="cell docutils container">
+<img src="pict/knn-1.png" width="" align="" /><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_9</span> <span class="o">=</span> <span class="n">_deepnote_execute_sql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM `irisDataset`.`irisSQL3` WHERE SepalLengthCm IS NULL&#39;</span><span class="p">,</span> <span class="s1">&#39;SQL_031FB961_6971_4E93_B126_A39EC95F0848&#39;</span><span class="p">,</span> <span class="n">audit_sql_comment</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sql_cache_mode</span><span class="o">=</span><span class="s1">&#39;cache_disabled&#39;</span><span class="p">)</span>
 <span class="n">df_9</span>
@@ -1600,18 +1600,18 @@ dtype: int64
 <ul class="simple">
 <li><p>K-Distance / K-Neighbors adalah jarak antara suatu titik, dan merupakan tetangga terdekat Kᵗʰ. Tetangga K yang dilambangkan dengan Nₖ(A) mencakup himpunan titik yang terletak di dalam atau pada lingkaran berjari-jari jarak K. K-tetangga bisa lebih dari atau sama dengan nilai K. Kita akan melihat contohnya. Katakanlah kita mempunyai empat titik A, B, C, dan D.                                                                                                     Jika K=2, K-tetangga A adalah C, B, dan D. Di sini, nilai K=2 tetapi ||N₂(A)|| = 3. Oleh karena itu, ||Nₖ(titik)|| akan selalu lebih besar atau sama dengan K.</p></li>
 </ul>
-<img src="k-distance.webp" width="" align="" /><ul class="simple">
+<img src="pict/loc-1.webp" width="" align="" /><ul class="simple">
 <li><p>Reachability Distance adalah salah satu konsep kunci yang digunakan untuk menghitung nilai LOF dari titik data dalam sebuah himpunan data.</p></li>
 </ul>
-<img src="reachability-distance.webp" width="" align="" /><p>Ini didefinisikan sebagai jarak K maksimum Xj dan jarak antara Xi dan Xj. Ukuran jarak bersifat khusus untuk masalah (Euclidean, Manhattan, dll.)</p>
-<img src="reachability-distance-diagram.webp" width="" align="" /><p>Dalam istilah awam, jika titik Xi terletak di dalam K-tetangga Xj, maka jarak jangkauannya adalah K-jarak Xj (garis biru), jika tidak, jarak jangkauannya adalah jarak antara Xi dan Xj (garis oranye).</p>
+<img src="pict/loc-2.webp" width="" align="" /><p>Ini didefinisikan sebagai jarak K maksimum Xj dan jarak antara Xi dan Xj. Ukuran jarak bersifat khusus untuk masalah (Euclidean, Manhattan, dll.)</p>
+<img src="pict/loc-3.webp" width="" align="" /><p>Dalam istilah awam, jika titik Xi terletak di dalam K-tetangga Xj, maka jarak jangkauannya adalah K-jarak Xj (garis biru), jika tidak, jarak jangkauannya adalah jarak antara Xi dan Xj (garis oranye).</p>
 <ul class="simple">
 <li><p>Local reachability density (LRD) adalah kebalikan dari rata-rata jarak jangkauan A dari tetangganya. Semakin besar jarak jangkauan rata-rata (yaitu, tetangga jauh dari titik tersebut), semakin sedikit kepadatan titik yang ada di sekitar titik tertentu. Ini menunjukkan seberapa jauh suatu titik dari kelompok titik terdekat. Nilai LRD yang rendah menunjukkan bahwa cluster terdekat berada jauh dari titik.</p></li>
 </ul>
-<img src="lrd.webp" width="" align="" /><ul class="simple">
+<img src="pict/loc-4.webp" width="" align="" /><ul class="simple">
 <li><p>Local Outlier Factor (LOF).</p></li>
 </ul>
-<img src="lof.webp" width="" align="" /><p>LRD tiap titik digunakan untuk membandingkan dengan rata-rata LRD K tetangganya. LOF adalah perbandingan rata-rata LRD K tetangga A terhadap LRD A.</p>
+<img src="pict/loc-5.webp" width="" align="" /><p>LRD tiap titik digunakan untuk membandingkan dengan rata-rata LRD K tetangganya. LOF adalah perbandingan rata-rata LRD K tetangga A terhadap LRD A.</p>
 <p>Jika suatu titik bukan merupakan pencilan (inlier), rasio rata-rata LRD tetangganya kira-kira sama dengan LRD suatu titik (karena kepadatan suatu titik dan tetangganya kira-kira sama). Dalam hal ini, LOF hampir sama dengan 1. Sebaliknya, jika suatu titik merupakan outlier, LRD suatu titik lebih kecil dari rata-rata LRD tetangganya. Maka nilai LOF akan tinggi.</p>
 <p>Umumnya jika LOF &gt; 1 maka dianggap outlier, namun hal tersebut tidak selalu benar. Katakanlah kita mengetahui bahwa kita hanya memiliki satu outlier dalam data, lalu kita ambil nilai LOF maksimum di antara semua nilai LOF, dan titik yang sesuai dengan nilai LOF maksimum akan dianggap sebagai outlier.</p>
 <section id="menghitung-manual-local-outlier-factor">
